@@ -45,6 +45,7 @@ const Register = async (req, res) => {
         });
     } else {
         bcryptjs.hash(password, 10, function (e, hashed_pw) {
+            console.log(data)
             const sData = new user({
                 firstName: data.firstName,
                 lastName: data.lastName,
@@ -56,9 +57,9 @@ const Register = async (req, res) => {
                 contact: data.contact,
                 department: data.department,
                 isVerify: true,
-                isHR: data.isHR,
-                isEmployee: data.isEmployee,
-                isManager: data.isManager,
+                isHR: req.body.isHR,
+                isEmployee: req.body.isEmployee,
+                isManager: req.body.isManager,
             });
             sData.save(function (err, data) {
                 // console.log(err)

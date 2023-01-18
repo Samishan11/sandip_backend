@@ -22,10 +22,10 @@ const UPDATE = async (req, res) => {
             department: data?.department,
             profile_pic: req?.file?.path,
             isVerify: req?.body?.isVerify,
-            isHR: user.isHR ? true : !user.isManager || !user.isEmployee ? req?.body?.isHR === "true" ? true : false : false,
-            isManager: user.isManager ? true : !user.isHR || !user.isEmployee ? req?.body?.isManager === "true" ? true : false : false,
-            isEmployee: user.isEmployee ? true  :!user.isHR || !user.isManager ? req?.body?.isEmployee === "true" ? true : false : false
-        },{new:true});
+            isHR: req?.body?.isHR,
+            isManager: req?.body?.isManager,
+            isEmployee: req?.body?.isEmployee
+        }, { new: true });
         return res.send({
             success: true,
             message: "Update Sucessfully."
@@ -63,8 +63,8 @@ const Changepassword = async (req, res) => {
             if (result === false) {
                 return res.json({ message: "Old password not match!", success: false });
             }
-            bcryptjs.hash(password, 10, function (err,hashed_pw) {
-                 userModel.findByIdAndUpdate(req.params.id, {
+            bcryptjs.hash(password, 10, function (err, hashed_pw) {
+                userModel.findByIdAndUpdate(req.params.id, {
                     password: hashed_pw,
                 }, { new: true }).then(data => {
                     console.log(data)
