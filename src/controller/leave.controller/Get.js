@@ -1,8 +1,9 @@
 const leaveModel = require('../../model/leave.model/leave.model');
 const GetLeave = async (req, res) => {
     try {
-        if (res?.userInfo?.isEmployee) {
-            const _res = await leaveModel.findOne({ user: req?.userInfo?._id });
+        if (req?.userInfo?.isEmployee) {
+            const _res = await leaveModel.find({ user: req?.userInfo?._id }).populate('user');
+            console.log(req?.userInfo?.isEmployee)
             return res.send({
                 message: "Sucess",
                 success: true,
@@ -10,6 +11,7 @@ const GetLeave = async (req, res) => {
             });
         }
         const _res = await leaveModel.find().populate("user");
+        // console.log(_res)
         return res.send({
             message: "Sucess",
             success: true,

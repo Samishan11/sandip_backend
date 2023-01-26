@@ -15,11 +15,13 @@ const VerifyJWT = async (req, res, next) => {
   
   try {
     const _res = jwt.verify(accessToken, ACCESS_TOKEN_KEY, { expireIN: "24h" })
+    // console.log(_res)
     userModel.findOne({ _id: _res?.userId }).then(function (result) {
       req.userInfo = result;
       next();
     });
   } catch (error) {
+    // console.log(error)
     return res.status(500).send({ message: error.message })
   }
 }

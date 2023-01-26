@@ -8,6 +8,7 @@ const leaveModel = new mongoose.Schema({
     date: String,
     leaveDuration: Number,
     leaveType: String,
+    leaveHalforFull:String,
     leaveReason: String,
     leaveDate:String,
     isApproved: {

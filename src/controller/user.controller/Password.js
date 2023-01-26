@@ -43,10 +43,12 @@ exports.Resetpassowrd = async (req, res) => {
     const newpassword = req.body.newpassword;
     const confirmpassword = req.body.confirmpassword;
     if (!newpassword && !confirmpassword) {
+        console.log('not match')
         return res.send({ data: 'Invalid Reqest', success: false })
     } else {
         const reset_token = await UserModel.findOne({ resetToken: token })
         if (!reset_token) {
+            console.log(reset_token)
             return res.send({ data: 'Invalid Reqest', success: false })
         } else {
             const user = await UserModel.findOne({ _id: reset_token._id })

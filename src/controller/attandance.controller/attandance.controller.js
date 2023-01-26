@@ -8,6 +8,7 @@ exports.PostAttandance = async (req, res) => {
             }
         })
         if (!attandanceFind) {
+            console.log('first')
             var _res = await new attandanceModel({
                 user: req.body.user,
                 date: new Date().toDateString(),
@@ -24,14 +25,15 @@ exports.PostAttandance = async (req, res) => {
 
         }
         if (filteAttandance) {
+            console.log(filteAttandance)
             console.log('already')
             return res.send({
                 success: true,
                 message: "Already had attandanted"
             })
         }
-        if(attandanceFind !== null){
-            var _res = await attandanceModel.findByIdAndUpdate({_id:attandanceFind?._id}, {
+        if (attandanceFind !== null) {
+            var _res = await attandanceModel.findByIdAndUpdate({ _id: attandanceFind?._id }, {
                 user: req?.userInfo?._id,
                 $push: {
                     attandance: {
@@ -58,7 +60,16 @@ exports.PostAttandance = async (req, res) => {
 
 exports.GetAttandance = async (req, res) => {
     try {
-        var _res = await attandanceModel.find()
+        if (req?.userInfo?.isEmployee) {
+            console.log('first')
+            var _res = await attandanceModel.findOne({ user: req.userInfo._id }).populate("user")
+            return res.send({
+                success: true,
+                data: _res,
+                message: "Attandanced Get"
+            })
+        }
+        var _res = await attandanceModel.find().populate('user')
         return res.send({
             success: true,
             data: _res,
@@ -75,12 +86,23 @@ exports.GetAttandance = async (req, res) => {
 
 exports.GetSingleAttandance = async (req, res) => {
     try {
-        var _res = await attandanceModel.findOne({ user: req.params.id }).populate("user")
+        if (req?.userInfo?.isEmployee) {
+            console.log('first')
+            var _res = await attandanceModel.findOne({ user: req.userInfo._id }).populate("user")
+            return res.send({
+                success: true,
+                data: _res,
+                message: "Attandanced Get"
+            })
+        }
+        console.log('second')
+        var _res = await attandanceModel.find().populate('user')
         return res.send({
             success: true,
             data: _res,
             message: "Attandanced Get"
         })
+
     } catch (error) {
         console.log(error)
         return res.send({

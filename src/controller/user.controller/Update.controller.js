@@ -24,7 +24,8 @@ const UPDATE = async (req, res) => {
             isVerify: req?.body?.isVerify,
             isHR: req?.body?.isHR,
             isManager: req?.body?.isManager,
-            isEmployee: req?.body?.isEmployee
+            isEmployee: req?.body?.isEmployee,
+            salary: req.body.salary
         }, { new: true });
         return res.send({
             success: true,

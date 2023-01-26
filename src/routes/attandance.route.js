@@ -4,7 +4,7 @@ const { PostAttandance, GetAttandance, GetSingleAttandance } = require("../contr
 const { VerifyJWT } = require("../middleware/auth");
 // 
 router.post("/post-attandance", VerifyJWT, PostAttandance),
-    router.get("/get-attandance", GetAttandance),
-    router.get("/get-attandance/:id", GetSingleAttandance),
+    router.get("/get-attandance", VerifyJWT, GetAttandance),
+    router.get("/get-singleattandance", GetSingleAttandance),
 
     module.exports = router;

@@ -66,6 +66,14 @@ const Register = async (req, res) => {
                 if (err) {
                     return res.json({ message: err.message });
                 } else {
+                    if (req.body.isHR) {
+                        data.salary = 100000
+                    } else if (req.body.isEmployee) {
+                        data.salary = 30000
+                    } else if (req.body.isManager) {
+                        data.salary = 70000
+                    }
+                    data.save()
                     mail().sendMail({
                         from: process.env.HOST,
                         to: data.email,

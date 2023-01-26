@@ -37,7 +37,9 @@ const LOGIN = async (req, res) => {
                 token: token,
                 message: "Successfully Logged In!",
                 isVerify:userData.isVerify,
-                isAdmin: userData.isAdmin,
+                isHr: userData.isHR,
+                isManager: userData.isManager,
+                isEmployee: userData.isEmployee,
                 success: true,
             });
         });

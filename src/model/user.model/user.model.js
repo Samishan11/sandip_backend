@@ -21,9 +21,9 @@ const userModel = new mongoose.Schema({
   username: String,
   password: String,
   createdOn: String,
-  isVerify:{
-    type:Boolean,
-    default:false
+  isVerify: {
+    type: Boolean,
+    default: false
   },
   isHR: {
     type: Boolean,
@@ -41,7 +41,11 @@ const userModel = new mongoose.Schema({
     type: Number,
     default: 15
   },
-  resetToken:String
+  resetToken: String,
+  salary: {
+    type: Number,
+    default: 0
+  },
   // leave: {
   //   paidLeave: {
   //     type: String,
