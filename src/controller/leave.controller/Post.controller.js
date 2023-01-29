@@ -28,7 +28,7 @@ const PostLeave = async (req, res) => {
                 });
             };
 
-            user.salary = user.salary - 2000
+            user.salary = user.salary - (user.salary/30)
             user.leaveDuration = user.leaveDuration - leaveDuration
             await user.save()
             return res.send({
@@ -43,7 +43,7 @@ const PostLeave = async (req, res) => {
                     success: false
                 });
             };
-            user.salary = user.salary - 1000
+            user.salary = user.salary - (user.salary/30 - (1000))
             user.leaveDuration = user.leaveDuration - leaveDuration
             await user.save()
             return res.send({
@@ -58,7 +58,7 @@ const PostLeave = async (req, res) => {
                     success: false
                 });
             };
-            user.salary = user.salary - 500
+            user.salary = user.salary - (user.salary/30 - (500))
             user.leaveDuration = user.leaveDuration - leaveDuration
             await user.save()
             return res.send({

@@ -1,3 +1,4 @@
+const e = require("express");
 const attandanceModel = require("../../model/attandance.model/attandance.model")
 exports.PostAttandance = async (req, res) => {
     try {
@@ -62,19 +63,22 @@ exports.GetAttandance = async (req, res) => {
     try {
         if (req?.userInfo?.isEmployee) {
             console.log('first')
-            var _res = await attandanceModel.findOne({ user: req.userInfo._id }).populate("user")
+            var _res = await attandanceModel.find({ user: req.userInfo._id }).populate("user")
+            console.log('first')
+            return res.send({
+                success: true,
+                data: _res,
+                message: "Attandanced Get"
+            })
+        }else if(req?.userInfo?.isManager || req?.userInfo?.isHR){
+            var _res = await attandanceModel.find().populate('user')
+            console.log('_res')
             return res.send({
                 success: true,
                 data: _res,
                 message: "Attandanced Get"
             })
         }
-        var _res = await attandanceModel.find().populate('user')
-        return res.send({
-            success: true,
-            data: _res,
-            message: "Attandanced Get"
-        })
     } catch (error) {
         console.log(error)
         return res.send({
