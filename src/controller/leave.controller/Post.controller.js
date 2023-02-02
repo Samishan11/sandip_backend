@@ -44,7 +44,7 @@ const PostLeave = async (req, res) => {
                 });
             };
             user.salary = user.salary - (user.salary/30 - (1000))
-            user.leaveDuration = user.leaveDuration - leaveDuration
+            // user.leaveDuration = user.leaveDuration - leaveDuration
             await user.save()
             return res.send({
                 message: "Fullday leave has been applied and salary has been deduct.",
@@ -59,7 +59,7 @@ const PostLeave = async (req, res) => {
                 });
             };
             user.salary = user.salary - (user.salary/30 - (500))
-            user.leaveDuration = user.leaveDuration - leaveDuration
+            // user.leaveDuration = user.leaveDuration - leaveDuration
             await user.save()
             return res.send({
                 message: "Halfday leave has been applied and salary has been deduct.",
